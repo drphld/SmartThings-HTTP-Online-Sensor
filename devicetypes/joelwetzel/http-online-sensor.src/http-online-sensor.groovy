@@ -21,8 +21,8 @@ metadata {
 
 	tiles {
 		standardTile("sensor", "device.sensor", width: 2, height: 2, canChangeBackground: false) {
-			state "inactive", label: "OFFLINE", backgroundColor:"#ee4444"
-			state "active", label: "ONLINE", backgroundColor:"#44ee44"
+			state "OFFLINE", label: "OFFLINE", backgroundColor:"#ee4444"
+			state "ONLINE", label: "ONLINE", backgroundColor:"#44ee44"
 		}
         
         standardTile("refresh", "device.refresh", inactiveLabel: false, decoration: "flat", width: 1, height: 1) {
@@ -61,7 +61,7 @@ def parse(description) {
         def deviceName = getLinkText(device);
         def descriptionText = "${deviceName} is ONLINE";
         log.debug descriptionText
-        sendEvent(name: "sensor", value: "active", linkText: deviceName, descriptionText: descriptionText)
+        sendEvent(name: "sensor", value: "ONLINE", linkText: deviceName, descriptionText: descriptionText)
     }
 }
 
@@ -79,7 +79,7 @@ def refresh() {
         def deviceName = getLinkText(device);
         def descriptionText = "${deviceName} is OFFLINE";
         log.debug descriptionText
-        sendEvent(name: "sensor", value: "inactive", linkText: deviceName, descriptionText: descriptionText)
+        sendEvent(name: "sensor", value: "OFFLINE", linkText: deviceName, descriptionText: descriptionText)
     }
     
   	def command = getPingCommand()
