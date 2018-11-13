@@ -14,7 +14,7 @@
  *
  */
 metadata {
-	definition (name: "http-online-sensor", namespace: "joelwetzel", author: "Joel Wetzel") {
+	definition (name: "Http Online Sensor", namespace: "joelwetzel", author: "Joel Wetzel") {
 		capability "Refresh"
 		capability "Sensor"
 	}
