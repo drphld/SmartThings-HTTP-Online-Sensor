@@ -25,7 +25,7 @@ So that's the reasoning behind this device handler.  Hopefully it will help your
 
 This handler supports SmartThings/GitHub integration.
 
-1) Log in to http://account.smartthings.com
+1) Log in to https://account.smartthings.com
 2) Click "My Device Handlers"
 3) Click "Settings"
 4) Add a new Git repo:
