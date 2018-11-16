@@ -17,20 +17,21 @@ metadata {
 	definition (name: "HTTP Online Sensor", namespace: "joelwetzel", author: "Joel Wetzel") {
 		capability "Refresh"
 		capability "Sensor"
+        capability "Presence Sensor"
 	}
 
 	tiles {
-		standardTile("sensor", "device.sensor", width: 2, height: 2, canChangeBackground: false) {
-			state "OFFLINE", label: "OFFLINE", backgroundColor:"#ee4444"
-			state "ONLINE", label: "ONLINE", backgroundColor:"#44ee44"
+		standardTile("presence", "device.presence", width: 2, height: 2, canChangeBackground: false) {
+			state "not present", label: "OFFLINE", backgroundColor:"#ee4444"
+			state "present", label: "ONLINE", backgroundColor:"#44ee44"
 		}
         
         standardTile("refresh", "device.refresh", inactiveLabel: false, decoration: "flat", width: 1, height: 1) {
 			state "default", action:"refresh.refresh", icon:"st.secondary.refresh"
 		}
         
-        main "sensor"
-        details(["sensor", "refresh"])
+        main "presence"
+        details(["presence", "refresh"])
 	}
 }
 
@@ -61,7 +62,7 @@ def parse(description) {
         def deviceName = getLinkText(device);
         def descriptionText = "${deviceName} is ONLINE";
         log.debug descriptionText
-        sendEvent(name: "sensor", value: "ONLINE", linkText: deviceName, descriptionText: descriptionText)
+        sendEvent(name: "presence", value: "present", linkText: deviceName, descriptionText: descriptionText)
     }
 }
 
@@ -79,7 +80,7 @@ def refresh() {
         def deviceName = getLinkText(device);
         def descriptionText = "${deviceName} is OFFLINE";
         log.debug descriptionText
-        sendEvent(name: "sensor", value: "OFFLINE", linkText: deviceName, descriptionText: descriptionText)
+        sendEvent(name: "presence", value: "not present", linkText: deviceName, descriptionText: descriptionText)
     }
     
   	def command = getPingCommand()
