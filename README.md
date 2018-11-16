@@ -1,5 +1,5 @@
 # SmartThings-HTTP-Online-Sensor
-A SmartThings device handler that regularly GETs an HTTP endpoint, including local network addresses.  It reveals a status of OFFLINE or ONLINE.
+A SmartThings device handler that regularly GETs an HTTP endpoint, including local network addresses.  It reveals a status of OFFLINE or ONLINE.  (For automation purposes, it is a Presence Sensor, and is either "present" or "not present", but the visual indication in the SmartThings app is ONLINE/OFFLINE.)
 
 ## Background
 
@@ -14,7 +14,7 @@ The easiest fix for all of this is just a reboot of the Raspberry Pi.
 
 ### Solution:
 1) Plug the Pi into a smart z-wave plug/outlet.
-2) Create a rule in CoRE (or WebCoRE or whatever rules engine you use) to cycle the Pi's power if it is detected that the Pi is offline
+2) Create a rule in WebCoRE (or CoRE or whatever rules engine you use) to cycle the Pi's power if it is detected that the Pi is offline
 3) Create a Device Handler type that could detect if the Pi was offline.
 
 Next problem:  You can't do a real PING of a local network device from a SmartThings hub.  You can only do simple HTTP GET requests.  However, HomeBridge (and specifically the SmartThings plugin for it) exposed a very simple endpoint at port 8000 that would just return OK if you get it.  So that would work for a ping-substitute.  The SmartThings hub just needs to regularly GET http://192.168.1.xxx:8000.  If a couple requests are missed in a row, consider it offline.
@@ -56,7 +56,6 @@ Final step:  The Device Network Id actually needs to be hex encoded.  To find an
 3) Copy the HEX encoded value
 4) Go back to the edit screen for your device and paste the HEX encoded value as the new "Device Network Id"
 
-Now, if you go back to live logging, you should see messages about your device being ONLINE or OFFLINE, depending on if it can be reached.  Your device will show up in the SmartThings mobile apps and you'll be able to run automation based on its state.
+Now, if you go back to live logging, you should see messages about your device being ONLINE or OFFLINE, depending on if it can be reached.  Your device will show up in the SmartThings mobile apps and you'll be able to run automation based on its presence state.
 
-Note that the status values to trigger off of are "ONLINE" and "OFFLINE".  
 
