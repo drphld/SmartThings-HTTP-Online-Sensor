@@ -115,7 +115,7 @@ private getHostAddress() {
             log.warn "Can't figure out ip and port for device: ${device.id}"
         }
 
-    	if (ip.startsWith("192.")) {
+    	if (ip.startsWith("192.168.") || ip.startsWith("10.") || ip.startsWith("172.")) {
         	log.error "Device Network Id is human readable: " + ip + ":" + port
             log.error "Device Network Id must be HEX encoded: " + convertIPtoHex(ip) + ":" + convertPortToHex(port)
             return ip + ":" + port
