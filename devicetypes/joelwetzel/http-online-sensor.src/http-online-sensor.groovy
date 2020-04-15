@@ -56,7 +56,7 @@ def parse(description) {
     def msg = parseLanMessage(description)
 //    log.debug "HTTP Status: ${msg.status}"
     
-    if (msg.status == 200) {
+    if (msg.status >= 200 && msg.status < 400) {
         state.tryCount = 0
         
         def deviceName = getLinkText(device);
